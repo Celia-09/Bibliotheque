@@ -30,24 +30,24 @@ let maximum t1 =
     done;
     !result;;
 
-(* [increase_l t1] retourne si [t1] a augmenté *)
-let increase_t t1 =
+(* [increase t1] retourne si [t1] a augmenté *)
+let increase t1 =
     let result = ref true in
     for i = 0 to ((Array.length t1)-2) do
         if t1.(i) > t1.(i+1) then result := false
     done;
     !result;;
 
-(* [decrease_t t1] returns if [t1] decreases *)
-let decrease_t t1 = 
+(* [decrease t1] retourne si [t1] a diminué *)
+let decrease t1 = 
     let result = ref true in
     for i = 0 to ((Array.length t1)-2) do
         if t1.(i) < t1.(i+1) then result := false
     done;
     !result;;
     
-(* [doublon_t t1] returns true or false if the has one or more duplicates *)
-let doublon_t t1 =
+(* [doublon t1] retourne vrai ou faux si il y a un doublon *)
+let doublon t1 =
     let result = ref false in
     for i = 0 to ((Array.length t1)-2) do
         for j = i + 1 to ((Array.length t1)-1) do
@@ -56,8 +56,8 @@ let doublon_t t1 =
     done;
     !result
 
-(* [reverse_t t1] transform [\a1;a2;...;an|] into [an;...;a2;a1|]*)
-let reverse_t t1 =
+(* [reverse t1] renverse le tableau *)
+let reverse t1 =
     let n = ((Array.length t1)-1) in 
     for i = 0 to n/2 do
         let c = ref t1.(i) in 
@@ -67,8 +67,8 @@ let reverse_t t1 =
     done;
     t1;;
 
-(* [equal_t [|a1; ...; an|] [|b1; ..; bm|]] holds when the two input arrays have the same length, and for each pair of elements ai, bi at the same position we have eq ai bi.*)
-let equal_t t1 t2 = 
+(* [equal t1 = [|a1; ...; an|] t2 = [|b1; ..; bm|]] vérifie si les deux tableaux ont la même taille,  et pour chaque éléments ai et bi des tableaux t1 et t2 on a eq ai bi.*)
+let equat t1 t2 = 
     let result = ref true in
     let m1 = Array.length t1 in
     let m2 = Array.length t2 in
@@ -78,8 +78,8 @@ let equal_t t1 t2 =
             done;
     !result;;
 
-(* [slice_max_t t1] returns the maximum sum of consecutive elements of [t1] *)
-let slice_max_t t1 =
+(* [tranche_max t1] retourne la somme maximum des éléments consécutifs de [t1] *)
+let tranche_max t1 =
     let m = ref t1.(0) in
     let m_cur = ref t1.(0) in
     for i = 1 to Array.length t1 - 1 do
@@ -88,14 +88,14 @@ let slice_max_t t1 =
     done;
     !m;;
 
-(* [map_t f [|a1; ...; an|]] applies function f to a1, ..., an, and builds the array [|f a1; ...; f an|] *) 
+(* [map f t1 ] applique la fonction f à chaque élément de t  *) 
 let map_t f t1 =
     for i = 0 to ((Array.length t1)-1) do
         t1.(i) <- f(t1.(i))
     done;
     t1;;
 
-(* [for_all_l f [|a1; ...; an|]] checks if all elements of the list satisfy the predicate f. That is, it returns (f a1) && (f a2) && ... && (f an) for a non-empty array and true if the array is empty. *)
+(* [for_all f t1]  vérifie que tous les éléments de du tableau vérifie f . Elle retourne (f a1) && (f a2) && ... && (f an)pour un tableau non vide  et vrai si le tableau est vide. *)
 let for_all_t f t1 =
     let result = ref true in
     for i = 0 to ((Array.length t1)-1) do
@@ -103,15 +103,15 @@ let for_all_t f t1 =
     done;
     !result;;
 
-(* [exists_l f [|a1; ...; an|]] checks if at least one element of the array satisfies the predicate f. That is, it returns (f a1) || (f a2) || ... || (f an) for a non-empty array and false if the array is empty. *)
-let exists_t f t1 =
+(* [exists f [|a1; ...; an|]] vérifique qu'au moins un élément du tableau vérifie f. Elle retourne (f a1) || (f a2) || ... || (f an) pour un tableau non vide  and faux pour un tableau vide *)
+let exists f t1 =
     let result = ref false in
     for i = 0 to ((Array.length t1)-1) do
         if f(t1.(i)) = true then result := true
     done;
     !result;;
     
-(* [dichotomie_t e t1] returns if e belongs to [t1] in complexity O(nlog(n))*)
+(* [dichotomie e t1] retourne si e appartient à t  [t1]; complexité : O(nlog(n))*)
 let dichotomie e t1 = 
     let rec aux i j =
         if i > j then false
@@ -121,7 +121,7 @@ let dichotomie e t1 =
             else aux (m+1) j in
 aux 0 ((Array.length t1)-1);;
 
-(* [trichotomie_t e t1] returns if e belongs to [t1] in complexity O(nlog(n))*)
+(* [trichotomie e t1] retroune si e appartient à  [t1] en complexité O(nlog(n))*)
 let trichotomie e t1 =
     let rec aux i j =
     if i > j then false
@@ -133,9 +133,9 @@ let trichotomie e t1 =
         else aux (m2+1) j in
 aux 0 ((Array.length t1)-1);;
 
-(* [tri_comptage_t  t1] transform t1 into a sorted array*)
-let tri_comptage_t t1 =
-    let m = maxi_t t1 in
+(* [tri_comptage  t1] transforme t1 en un tableau trié *)
+let tri_comptage_ t1 =
+    let m = maximum t1 in
     let compte = Array.make (m+1) 0 in
     let n = Array.length t1 in
     for i=0 to n - 1 do
@@ -150,26 +150,22 @@ let tri_comptage_t t1 =
     done;
     t1;;
     
-(* [swap t i j] exchanges [t.(i)] and [t.(j)] *)    
-let swap_t t1 i j =
+(* [swap t1 i j] échange [t.(i)] et [t.(j)] *)    
+let swap t1 i j =
   let tmp = t1.(i) in
   t1.(i) <- t1.(j);
   t1.(j) <- tmp;;
   
 (* [sort_bubble t] sorts array t using bubble sorting (O(n**2)) *)
-let sort_bubble_t t1 = 
+let sort_bubble t1 = 
   for _ = 0 to Array.length t1 - 1 do
     for j = 0 to Array.length t1 - 2 do
       if t1.(j) > t1.(j + 1) then swap_t t1 j (j + 1)
       done
   done;;
   
-(* [length_l l1] returns the length of [l1]*) 
-let rec length_l l1 = match l1 with
-    |[] -> 0
-    |e::q -> 1 + length_l q;;
 
-(* [array_of_list l] transform a list into a array *)
+(* [array_of_list l] transforme une liste en tableau *)
 let array_of_list l = 
     let m = length_l l in
     let t = Array.make m 0 in
@@ -180,7 +176,7 @@ let array_of_list l =
                 else aux (m1 - 1) q in
 aux m l;;
 
-(* [array_to_list t] transform a array into a list *)
+(* [array_to_list t] transforme un tableau en liste  *)
 let array_to_list t = 
     let m = Array.length t in
     let rec aux i = 
@@ -191,21 +187,21 @@ aux m;;
 
 type 'a dyn = {mutable t :'a array; mutable n : int};;
 
-(*copy t1 into t2 *)
+(*copie t1 dans t2 *)
 let copy t1 t2 = 
     for i = 0 to Array.length t1 - 1 do
     t2.(i) <- t1.(i)
     done;;
     
     
-(*[add e d] add einto d with O(1) complexity *)
+(*[add e d] ajoute e dans  d ; Compléxité : O(1) *)
 let add e d =
     if d.n < Array.length d.t then (d.t.(d.n) <- e;d.n <-d.n +1) 
     else if d.n = 0 then (d.t <- [|e|]; d.n <- d.n + 1)
     else let t' = Array.make (2*d.n) d.t.(0) in
     (copy d.t t'; t'.(d.n) <- e; d.t <- t';d.n <- d.n + 1);
 
-(* [del d] delete the last data add*)
+(* [del d] suprime la dernière donnée ajouté*)
 let del d = 
     if d.n = 0 then failwith "array is empty"
     else (d.n <- d.n - 1; d.t.(d.n));;
