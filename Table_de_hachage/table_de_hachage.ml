@@ -1,6 +1,6 @@
 type ('a, 'b) table_de_hachage = {hache : 'a -> int; data : ('a*'b) list array; length :int};;
 
-(*créer une table de hachage " *)
+(*créer une table de hachage*)
 let create h c = {hache = h; data = Array.make c []; length = c};;
 
 (*[search t k] retourne si k t appartient à la table de hachage*)
