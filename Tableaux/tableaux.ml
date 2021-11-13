@@ -160,14 +160,17 @@ let swap t1 i j =
 let sort_bubble t1 = 
   for _ = 0 to Array.length t1 - 1 do
     for j = 0 to Array.length t1 - 2 do
-      if t1.(j) > t1.(j + 1) then swap_t t1 j (j + 1)
+      if t1.(j) > t1.(j + 1) then swap t1 j (j + 1)
       done
   done;;
   
+let rec lth l1 = match l1 with
+    |[] -> 0
+    |e::q -> 1 + lth q;;
 
 (* [array_of_list l] transforme une liste en tableau *)
 let array_of_list l = 
-    let m = length_l l in
+    let m = lth l in
     let t = Array.make m 0 in
     let rec aux m1 l1 = match l1 with
         |[]->[||]
@@ -201,7 +204,4 @@ let add e d =
     else let t' = Array.make (2*d.n) d.t.(0) in
     (copy d.t t'; t'.(d.n) <- e; d.t <- t';d.n <- d.n + 1);
 
-(* [del d] suprime la dernière donnée ajouté*)
-let del d = 
-    if d.n = 0 then failwith "array is empty"
-    else (d.n <- d.n - 1; d.t.(d.n));;
+
