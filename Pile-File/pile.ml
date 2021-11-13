@@ -15,16 +15,16 @@ let stack_pop p = match p with
 type 'a stack = { t: 'a array ; mutable n : int } 
 
 (* [stack_empty p] retourne si p est vide *)
-let stack_empty p = p.n = 0;;
+let stack_empty_t p = p.n = 0;;
 
 (* [stack_push p e] met e dans p  *)
-let stack_push p e =
+let stack_push_t p e =
   if p.n = Array.length p.t then failwith "full"
   else (p.t.(p.n) <- e;
         p.n <- p.n +1);;
         
 (* [stack_pop p] retire le premier élément et le donne  *)
-let stack_pop p =
+let stack_pop_t p =
   if p.n = 0 then failwith "stack is empty"
   else (p.n <- p.n -1 ;p.t.(p.n));;
 
