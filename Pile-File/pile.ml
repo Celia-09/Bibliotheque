@@ -51,6 +51,6 @@ let stack_pop_d p =
   if p.n = 0 then failwith "stack is empty"
   else (p.n <- p.n -1 ;p.d.(p.n));;
   
-(* [stack_empty_d p] retourne si pe est vide *)
+(* [stack_empty_d p] retourne si p est vide *)
 let stack_empty_d p = p.n = 0;;
 
