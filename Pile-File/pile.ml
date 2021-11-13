@@ -1,5 +1,5 @@
-(*[stack_empty p retourne p si p est vide  *)
-let stack_empty p = p = [];;
+(*[stack_empty p retourne  si p est vide  *)
+let stack_empty p =  p = [];;
 
 (* [stack_push p e] met e dans p *)
 let stack_push p e =  e::p;;
@@ -53,3 +53,4 @@ let stack_pop_d p =
   
 (* [stack_empty_d p] retourne si pe est vide *)
 let stack_empty_d p = p.n = 0;;
+
