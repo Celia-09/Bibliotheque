@@ -3,7 +3,7 @@ type 'a file = {plus: 'a list; add: 'a list};;
 
 (* [ajoute_file f e] ajoute e dans la liste add *)
 let ajoute_file f e = 
-    {plus = f.add; add = e::f.add}
+    {plus = f.plus; add = e::f.add}
     
 (* [empty_file ] retourne si f est vide ou pas *)
 let empty_file f =
