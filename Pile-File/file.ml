@@ -3,14 +3,14 @@ type 'a file = {plus: 'a list; add: 'a list};;
 
 (* [ajoute_file f e] ajoute e dans la liste add *)
 let ajoute_file f e = 
-    {plus = f.extra; plus = e::f.add}
+    {plus = f.add; add = e::f.add}
     
 (* [empty_file ] retourne si f est vide ou pas *)
 let empty_file f =
     f.plus = [] && f.add = [];;
 
 (*[pop_file f] delete the first element of extra (so the last element of the file) and give this element*) 
-let rec pop_file f = match f.extra with
+let rec pop_file f = match f.add with
   |e::q -> e, {plus = q; add = f.add}
   |[] -> pop_file {plus = List.rev f.add ; add= []};;
     
